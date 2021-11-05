@@ -1,0 +1,4 @@
+requests==2.*
+PyYAML==6.*
+lxml==4.*
+Pygments==2.*
