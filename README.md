@@ -41,6 +41,56 @@ yeet "some/folder/myrequest.yml"
 yeet "some/folder/myrequest.json"
 ```
 
+## Sample request file (`myrequest.yml`)
+
+### GET
+
+```yaml
+url: https://cdn.animenewsnetwork.com/encyclopedia/api.xml?anime=4658
+method: get
+params:
+  offset: 2
+  limit: 100
+headers:
+  accept: text/xml
+  accept-language: en
+timeout: 5000
+```
+
+### POST
+
+```yaml
+url: https://jsonplaceholder.typicode.com/todos/
+method: POST
+headers:
+  Authorization: Basic bXl1c2VybmFtZTpteXBhc3N3b3Jk
+  content-type: application/json
+data:
+  title: walk the dog
+  completed: false
+timeout: 5000
+```
+
+### PUT
+
+```yaml
+url: https://jsonplaceholder.typicode.com/todos/1
+method: PUT
+headers:
+  content-type: application/json
+data:
+  title: walk the dog
+  completed: true
+timeout: 5000
+```
+
+### DELETE
+
+```yaml
+url: https://jsonplaceholder.typicode.com/todos/1
+method: DELETE
+```
+
 ## Development setup
 
 Clone this repo and install packages listed in requirements.txt
