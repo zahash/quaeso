@@ -35,11 +35,12 @@ def output_formatted(res):
 
 
 def handle_metadata_out(res):
-    text = ""
-    text += "Status: {}\n".format(res.status_code)
-    for k, v in res.headers.items():
-        text += "{}: {}\n".format(k, v)
+    metadata = []
+    metadata.append(f"Status: {res.status_code}")
+    for k, v in sorted(res.headers.items(), key=lambda x: x[0].lower()):
+        metadata.append(f"{k}: {v}")
 
+    text = "\n".join(metadata)
     if sys.stderr.isatty():
         text = highlight(text, YamlLexer(), TerminalTrueColorFormatter())
     err(text)
