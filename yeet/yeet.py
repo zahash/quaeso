@@ -14,10 +14,10 @@ from pygments.formatters.terminal import TerminalFormatter
 
 def out(x): return sys.stdout.write(str(x)+"\n")
 def err(x): return sys.stderr.write(str(x)+"\n")
+def by_key_lower(item: tuple): key, val = item; return key.lower()
 
 
-def yeet(req):
-    return request(**req)
+def yeet(req): return request(**req)
 
 
 def output_formatted(res):
@@ -37,7 +37,7 @@ def output_formatted(res):
 def handle_metadata_out(res):
     metadata = []
     metadata.append(f"Status: {res.status_code}")
-    for k, v in sorted(res.headers.items(), key=lambda x: x[0].lower()):
+    for k, v in sorted(res.headers.items(), key=by_key_lower):
         metadata.append(f"{k}: {v}")
 
     text = "\n".join(metadata)
