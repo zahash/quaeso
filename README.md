@@ -41,6 +41,14 @@ yeet "some/folder/myrequest.yml"
 yeet "some/folder/myrequest.json"
 ```
 
+## IO Redirection
+
+the response is written to stdout and headers/status are written to stderr so that linux users can take IO redirection to their advantage
+
+```sh
+yeet "some/folder/myrequest.yml" > res.json 2> res_headers.txt
+```
+
 ## Sample request file (`myrequest.yml`)
 
 ### GET
