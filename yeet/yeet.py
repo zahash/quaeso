@@ -12,6 +12,7 @@ from pygments.formatters.terminal256 import TerminalTrueColorFormatter
 from pygments.formatters.terminal import TerminalFormatter
 
 
+def bout(x): sys.stdout.buffer.write(x)
 def out(x): return sys.stdout.write(str(x)+"\n")
 def err(x): return sys.stderr.write(str(x)+"\n")
 def by_key_lower(item: tuple): key, val = item; return key.lower()
@@ -30,8 +31,10 @@ def output_formatted(res):
         handle_xml_out(res.text)
     elif content_type.startswith("text/html"):
         handle_html_out(res.text)
-    else:
+    elif content_type.startswith("text"):
         handle_plain_out(res.text)
+    else:
+        handle_binary_out(res.content)
 
 
 def handle_metadata_out(res):
@@ -73,6 +76,10 @@ def handle_html_out(text):
 
 def handle_plain_out(text):
     out(text)
+
+
+def handle_binary_out(content):
+    bout(content)
 
 
 def parse_args():
