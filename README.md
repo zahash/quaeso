@@ -65,6 +65,13 @@ headers:
 timeout: 5000
 ```
 
+#### File Download (`yeet "some/folder/myrequest.yml" > book.pdf`)
+
+```yaml
+url: http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf
+method: get
+```
+
 ### POST
 
 ```yaml
