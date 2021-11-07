@@ -106,6 +106,64 @@ url: https://jsonplaceholder.typicode.com/todos/1
 method: DELETE
 ```
 
+## Complete request file with all available fields (`myrequest.yml`)
+
+```yaml
+method: XXX # (REQUIRED) GET, OPTIONS, HEAD, POST, PUT, PATCH, or DELETE
+url: XXX # (REQUIRED) must be prefixed with http:// or https://
+
+params: # url query parameters. have as many as you like
+  offset: 0
+  limit: 10
+
+data: # data for POST
+  name: john
+  age: 22
+  hobbies:
+    - running
+    - eating
+    - sleeping
+
+# you can also type data in json format instead of yaml
+data: |
+  {
+    "name": "john",
+    "age": 22,
+    "hobbies": ["running", "eating", "sleeping"]
+  }
+
+headers: # have as many as you like
+  Content-Type: application/json
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+
+cookies: # have as many as you like
+  mycookie: cookievalue
+  myothercookie: othercookievalue
+
+timeout: 3.14 # seconds
+
+allow_redirects: true # true or false
+
+proxies: # have as many as you like
+  http: http://10.10.1.10:3128
+  https: https://10.10.1.11:1080
+  ftp: ftp://10.10.1.10:3128
+
+# EITHER verify server's TLS certificate. true or false
+verify: true
+# OR path to a CA bundle to use
+verify: some/folder/cacert.crt
+
+# EITHER path to single ssl client cert file (*.pem)
+cert: some/folder/client.pem
+# OR (*.cert), (*.key) pair.
+cert:
+  - some/folder/client.cert
+  - some/folder/client.key
+
+```
+
 ## Development setup
 
 Clone this repo and install packages listed in requirements.txt
