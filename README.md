@@ -43,10 +43,16 @@ yeet "some/folder/myrequest.json"
 
 ## IO Redirection
 
-the response is written to stdout and headers/status are written to stderr so that linux users can take IO redirection to their advantage
+the response is written to stdout and headers/status are written to stderr so that users can take IO redirection to their advantage. This works on windows, linux and mac.
 
 ```sh
 yeet "some/folder/myrequest.yml" > res.json 2> res_headers.txt
+```
+
+both stdout and stderr can be redirected to the same file
+
+```sh
+yeet "some/folder/myrequest.yml" > res.json 2>&1
 ```
 
 ## Sample request file (`myrequest.yml`)
