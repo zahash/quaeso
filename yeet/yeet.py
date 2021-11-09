@@ -1,114 +1,50 @@
-import sys
-import argparse
 import json
-import yaml
-from functools import partial
+import sys
+from collections import namedtuple
+
 from requests.api import request
-from lxml import etree, html
+from requests import Response
 
-STDOUT_STAYS_ON_TERMINAL = sys.stdout.isatty()
-STDERR_STAYS_ON_TERMINAL = sys.stderr.isatty()
-
-# use colors only on terminal and NOT on file
-# import pygments only if either stdout or stderr are on terminal
-# (i.e. don't import if both are redirected to files)
-if STDOUT_STAYS_ON_TERMINAL or STDERR_STAYS_ON_TERMINAL:
-    from pygments import highlight
-    from pygments.lexers.data import JsonLexer, YamlLexer
-    from pygments.lexers.html import HtmlLexer, XmlLexer
-    from pygments.formatters.terminal256 import TerminalTrueColorFormatter
-    from pygments.formatters.terminal import TerminalFormatter
+from yeet.io.reader import read_request_file
+from yeet.io.writer import write
+from yeet.visual import formatter, colorizer
 
 
-def bout(x): sys.stdout.buffer.write(x)
-def out(x): sys.stdout.write(str(x)+"\n")
-def err(x): sys.stderr.write(str(x)+"\n")
-def by_key_lower(item: tuple): key, val = item; return key.lower()
+class Yeeter:
+    Visual = namedtuple("Visual", ["formatter", "colorizer"])
 
+    def __init__(self):
+        # if output stays on terminal then isatty() returns True
+        # if output is redirected to file then isatty() returns False
+        self.colorize_stdout: bool = sys.stdout.isatty()
+        self.colorize_stderr: bool = sys.stderr.isatty()
 
-def yeet(req): return request(**req)
+        self.content_type_visual = {}
+        for content_type, formatter_fn, colorizer_fn in [
+            ("application/json", formatter.format_json_string, colorizer.colorize_json_string),
+            ("text/xml", formatter.format_xml_string, colorizer.colorize_xml_string),
+            ("text/html", formatter.format_html_string, colorizer.colorize_html_string)
+        ]:
+            self.content_type_visual[content_type] = self.Visual(formatter_fn, colorizer_fn)
 
+    def yeet(self, request_filepath):
+        request_data: dict = read_request_file(request_filepath)
+        response: Response = request(**request_data)
 
-def output_formatted(res):
-    handle_metadata_output(res)
+        metadata_text = json.dumps(dict(**response.headers, **{"status": response.status_code, "url": response.url}))
+        write(metadata_text, sys.stderr,
+              formatter=formatter.format_metadata,
+              colorizer=colorizer.colorize_metadata_string if self.colorize_stderr else None)
 
-    content_type = res.headers.get("content-type", "")
-    if content_type.startswith("application/json"):
-        handle_json_output(res.text)
-    elif content_type.startswith("text/xml"):
-        handle_xml_output(res.text)
-    elif content_type.startswith("text/html"):
-        handle_html_output(res.text)
-    elif content_type.startswith("text"):
-        handle_plain_output(res.text)
-    else:
-        handle_binary_output(res.content)
+        content_type: str = self._get_content_type(response)
+        if content_type in self.content_type_visual.keys():
+            write(response.content.decode('utf-8'), sys.stdout,
+                  formatter=self.content_type_visual[content_type].formatter,
+                  colorizer=self.content_type_visual[content_type].colorizer if self.colorize_stdout else None)
+        else:
+            write(response.content, sys.stdout.buffer, formatter=None, colorizer=None)
 
-
-def handle_metadata_output(res):
-    metadata: list[str] = []
-    metadata.append(f"Status: {res.status_code}")
-    for k, v in sorted(res.headers.items(), key=by_key_lower):
-        metadata.append(f"{k}: {v}")
-    text = "\n".join(metadata)
-
-    if STDERR_STAYS_ON_TERMINAL:
-        text = highlight(text, YamlLexer(), TerminalTrueColorFormatter())
-    err(text)
-
-
-def handle_json_output(text):
-    text = json.dumps(json.loads(text), indent=4)
-    if STDOUT_STAYS_ON_TERMINAL:
-        text = highlight(text, JsonLexer(), TerminalFormatter())
-    out(text)
-
-
-def handle_xml_output(text):
-    data = etree.fromstring(text)
-    etree.indent(data, space=" "*2)
-    text = etree.tostring(data, encoding="unicode")
-    if STDOUT_STAYS_ON_TERMINAL:
-        text = highlight(text, XmlLexer(), TerminalFormatter())
-    out(text)
-
-
-def handle_html_output(text):
-    data = html.fromstring(text)
-    etree.indent(data, space=" "*2)
-    text = html.tostring(data, encoding="unicode")
-    if STDOUT_STAYS_ON_TERMINAL:
-        text = highlight(text, HtmlLexer(), TerminalFormatter())
-    out(text)
-
-
-def handle_plain_output(text):
-    out(text)
-
-
-def handle_binary_output(content):
-    bout(content)
-
-
-def parse_args():
-    ap = argparse.ArgumentParser(allow_abbrev=False)
-    ap.add_argument(
-        "requestfile",
-        type=str,
-        help="Request file in .json or .yaml or .yml format",
-    )
-    return ap.parse_args()
-
-
-def read_file(filepath):
-    if filepath.endswith(".yml") or filepath.endswith(".yaml"):
-        loader = partial(yaml.load, Loader=yaml.FullLoader)
-    elif filepath.endswith(".json"):
-        loader = json.load
-    else:
-        raise Exception("Unsupported file type")
-
-    with open(filepath, "r") as f:
-        file_data = loader(f)
-
-    return file_data
+    @staticmethod
+    def _get_content_type(res: Response) -> str:
+        content_type, *_ = res.headers["content-type"].split(";")
+        return content_type.strip().lower()

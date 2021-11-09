@@ -1,8 +1,19 @@
-from .yeet import parse_args, read_file, yeet, output_formatted
+import argparse
+
+from yeet.yeet import Yeeter
 
 
 def main():
     args = parse_args()
-    req = read_file(args.requestfile)
-    res = yeet(req)
-    output_formatted(res)
+    yeeter = Yeeter()
+    yeeter.yeet(args.requestfilepath)
+
+
+def parse_args():
+    ap = argparse.ArgumentParser(allow_abbrev=False)
+    ap.add_argument(
+        "requestfilepath",
+        type=str,
+        help="Request filepath in .json or .yaml or .yml format",
+    )
+    return ap.parse_args()
