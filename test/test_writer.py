@@ -27,7 +27,7 @@ def fake_bytes_colorizer(content: bytes):
     return b"colorized_" + content
 
 
-class TestFormatter(unittest.TestCase):
+class TestWriter(unittest.TestCase):
     def setUp(self) -> None:
         self.fake_writeable = FakeWriteable()
 

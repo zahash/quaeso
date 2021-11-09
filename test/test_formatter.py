@@ -4,7 +4,7 @@ from yeet.visual import formatter
 
 class TestFormatter(unittest.TestCase):
     def test_format_metadata(self):
-        metadata = {'const1': 'const2'}
+        metadata = '{"const1": "const2"}'
         formatted = formatter.format_metadata(metadata)
         self.assertEqual(formatted, 'const1: const2')
 
