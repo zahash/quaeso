@@ -26,7 +26,7 @@ setup(
             'yeet = yeet.__main__:main',
         ],
     },
-    python_requires='>=3.7',
+    python_requires='>=3.8',
     classifiers=[
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
