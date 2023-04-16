@@ -4,10 +4,11 @@ from collections import namedtuple
 
 from requests.api import request
 from requests import Response
+from yeet import formatter
 
-from yeet.io.reader import read_request_file
-from yeet.io.writer import write
-from yeet.visual import formatter, colorizer
+from yeet.reader import read_request_file
+from yeet.writer import write
+from yeet import colorizer
 
 
 class Yeeter:

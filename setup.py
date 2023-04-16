@@ -13,7 +13,7 @@ with (HERE / "requirements.txt").open() as f:
 
 setup(
     name="yeet",
-    version="0.0.3",
+    version="0.0.4",
     description="Yeet DEM Requests",
     long_description=README,
     long_description_content_type="text/markdown",

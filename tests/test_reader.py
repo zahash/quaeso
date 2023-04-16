@@ -3,7 +3,7 @@ import yaml
 import tempfile
 import unittest
 
-from yeet.io import reader
+from yeet import reader
 
 
 class TestReader(unittest.TestCase):

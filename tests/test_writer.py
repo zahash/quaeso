@@ -1,6 +1,6 @@
 import unittest
 from typing import Union
-from yeet.io import writer
+from yeet import writer
 
 
 class FakeWriteable:

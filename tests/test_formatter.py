@@ -1,5 +1,5 @@
 import unittest
-from yeet.visual import formatter
+from yeet import formatter
 
 
 class TestFormatter(unittest.TestCase):
