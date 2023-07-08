@@ -47,6 +47,8 @@ sometimes the yeet command doesn't work in windows if the package is installed g
 
 to avoid this, install the package in a local virtual env
 
+first, create a env
+
 ```sh
 python3 -m venv env_for_yeet
 ```
