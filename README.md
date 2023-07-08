@@ -41,6 +41,24 @@ yeet "some/folder/myrequest.yml"
 yeet "some/folder/myrequest.json"
 ```
 
+### Disclaimer
+
+sometimes the yeet command doesn't work in windows if the package is installed globally.
+
+to avoid this, install the package in a local virtual env
+
+```sh
+python3 -m venv env_for_yeet
+```
+
+activate that env
+
+```sh
+.\env_for_yeet\Scripts\activate
+```
+
+and then pip install. But you will have to activate that env everytime you want to use yeet.
+
 ## IO Redirection
 
 the response is written to stdout and headers/status are written to stderr so that users can take IO redirection to their advantage. This works on windows, linux and mac.
