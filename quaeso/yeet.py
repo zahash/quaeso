@@ -4,23 +4,23 @@ from collections import namedtuple
 
 from requests.api import request
 from requests import Response
-from yeet import formatter
+from quaeso import formatter
 
-from yeet.reader import read_request_file
-from yeet.writer import write
-from yeet import colorizer
+from quaeso.reader import read_request_file
+from quaeso.writer import write
+from quaeso import colorizer
 
 
 class Yeeter:
     Visual = namedtuple("Visual", ["formatter", "colorizer"])
 
-    def __init__(self):
+    def __init__(self, colorize: bool = True):
         sys.stdout.reconfigure(encoding='utf-8')
 
         # if output stays on terminal then isatty() returns True
         # if output is redirected to file then isatty() returns False
-        self.colorize_stdout: bool = sys.stdout.isatty()
-        self.colorize_stderr: bool = sys.stderr.isatty()
+        self.colorize_stdout: bool = colorize and sys.stdout.isatty()
+        self.colorize_stderr: bool = colorize and sys.stderr.isatty()
 
         self.content_type_visual = {}
         for content_type, formatter_fn, colorizer_fn in [

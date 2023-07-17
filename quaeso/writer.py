@@ -10,4 +10,5 @@ def write(content: Union[str, bytes], to: Writeable, formatter=None, colorizer=N
     if isinstance(content, str):
         content = formatter(content) if formatter else content
         content = colorizer(content) if colorizer else content
+        content = "\n" + content + "\n"
     to.write(content)

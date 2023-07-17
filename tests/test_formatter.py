@@ -1,5 +1,5 @@
 import unittest
-from yeet import formatter
+from quaeso import formatter
 
 
 class TestFormatter(unittest.TestCase):

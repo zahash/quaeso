@@ -1,6 +1,6 @@
-# yeet
+# quaeso
 
-> yeet dem requests
+> python cli program to send requests
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -12,13 +12,13 @@ pip install this repo.
 (Note: Incompatible with Python 2.x)
 
 ```sh
-pip3 install git+https://github.com/zahash/yeet.git
+pip3 install git+https://github.com/zahash/quaeso.git
 ```
 
 (or)
 
 ```sh
-pip install git+https://github.com/zahash/yeet.git
+pip install git+https://github.com/zahash/quaeso.git
 ```
 
 ## Usage example
@@ -26,53 +26,53 @@ pip install git+https://github.com/zahash/yeet.git
 To get help with commandline arguments
 
 ```sh
-yeet --help
+quaeso --help
 ```
 
 Using Command-line Arguments
 
 ```sh
-yeet "some/folder/myrequest.yml"
+quaeso "some/folder/myrequest.yml"
 ```
 
 (or)
 
 ```sh
-yeet "some/folder/myrequest.json"
+quaeso "some/folder/myrequest.json"
 ```
 
 ### Disclaimer
 
-sometimes the yeet command doesn't work in windows if the package is installed globally.
+sometimes the quaeso command doesn't work in windows if the package is installed globally.
 
 to avoid this, install the package in a local virtual env
 
 first, create a env
 
 ```sh
-python3 -m venv env_for_yeet
+python3 -m venv env_for_quaeso
 ```
 
 activate that env
 
 ```sh
-.\env_for_yeet\Scripts\activate
+.\env_for_quaeso\Scripts\activate
 ```
 
-and then pip install. But you will have to activate that env everytime you want to use yeet.
+and then pip install. But you will have to activate that env everytime you want to use quaeso.
 
 ## IO Redirection
 
 the response is written to stdout and headers/status are written to stderr so that users can take IO redirection to their advantage. This works on windows, linux and mac.
 
 ```sh
-yeet "some/folder/myrequest.yml" > res.json 2> res_headers.txt
+quaeso "some/folder/myrequest.yml" > res.json 2> res_headers.txt
 ```
 
 both stdout and stderr can be redirected to the same file
 
 ```sh
-yeet "some/folder/myrequest.yml" > res.json 2>&1
+quaeso "some/folder/myrequest.yml" > res.json 2>&1
 ```
 
 ## Sample request file (`myrequest.yml`)
@@ -91,7 +91,7 @@ headers:
 timeout: 5000
 ```
 
-#### File Download (`yeet "some/folder/myrequest.yml" > book.pdf`)
+#### File Download (`quaeso "some/folder/myrequest.yml" > book.pdf`)
 
 ```yaml
 url: http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf
@@ -208,7 +208,7 @@ Distributed under the MIT license. See `LICENSE` for more information.
 
 ## Contributing
 
-1. Fork it (<https://github.com/zahash/yeet/fork>)
+1. Fork it (<https://github.com/zahash/quaeso/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)

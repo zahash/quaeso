@@ -1,6 +1,6 @@
 import unittest
 from typing import Union
-from yeet import writer
+from quaeso import writer
 
 
 class FakeWriteable:
@@ -34,39 +34,39 @@ class TestWriter(unittest.TestCase):
     def test_write_text_noformatter_nocolorizer(self):
         content = "const1"
         writer.write(content, self.fake_writeable, formatter=None, colorizer=None)
-        self.assertEqual(self.fake_writeable.written_content, content)
+        self.assertEqual(self.fake_writeable.written_content.strip().strip(), content)
 
     def test_write_text_withformatter_nocolorizer(self):
         content = "const1"
         writer.write(content, self.fake_writeable, formatter=fake_text_formatter, colorizer=None)
-        self.assertEqual(self.fake_writeable.written_content, fake_text_formatter(content))
+        self.assertEqual(self.fake_writeable.written_content.strip(), fake_text_formatter(content))
 
     def test_write_text_noformatter_withcolorizer(self):
         content = "const1"
         writer.write(content, self.fake_writeable, formatter=None, colorizer=fake_text_colorizer)
-        self.assertEqual(self.fake_writeable.written_content, fake_text_colorizer(content))
+        self.assertEqual(self.fake_writeable.written_content.strip(), fake_text_colorizer(content))
 
     def test_write_text_withformatter_withcolorizer(self):
         content = "const1"
         writer.write(content, self.fake_writeable, formatter=fake_text_formatter, colorizer=fake_text_colorizer)
-        self.assertEqual(self.fake_writeable.written_content, fake_text_colorizer(fake_text_formatter(content)))
+        self.assertEqual(self.fake_writeable.written_content.strip(), fake_text_colorizer(fake_text_formatter(content)))
 
     def test_write_bytes_noformatter_nocolorizer(self):
         content = b"const1"
         writer.write(content, self.fake_writeable, formatter=None, colorizer=None)
-        self.assertEqual(self.fake_writeable.written_content, content)
+        self.assertEqual(self.fake_writeable.written_content.strip(), content)
 
     def test_write_bytes_withformatter_nocolorizer(self):
         content = b"const1"
         writer.write(content, self.fake_writeable, formatter=fake_bytes_formatter, colorizer=None)
-        self.assertEqual(self.fake_writeable.written_content, content)
+        self.assertEqual(self.fake_writeable.written_content.strip(), content)
 
     def test_write_bytes_noformatter_withcolorizer(self):
         content = b"const1"
         writer.write(content, self.fake_writeable, formatter=None, colorizer=fake_bytes_colorizer)
-        self.assertEqual(self.fake_writeable.written_content, content)
+        self.assertEqual(self.fake_writeable.written_content.strip(), content)
 
     def test_write_bytes_withformatter_withcolorizer(self):
         content = b"const1"
         writer.write(content, self.fake_writeable, formatter=fake_bytes_formatter, colorizer=fake_bytes_colorizer)
-        self.assertEqual(self.fake_writeable.written_content, content)
+        self.assertEqual(self.fake_writeable.written_content.strip(), content)

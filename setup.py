@@ -12,18 +12,18 @@ with (HERE / "requirements.txt").open() as f:
     requirements = f.read().splitlines()
 
 setup(
-    name="yeet",
-    version="0.0.4",
-    description="Yeet DEM Requests",
+    name="quaeso",
+    version="0.1.0",
+    description="python cli program to send requests",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/zahash/yeet",
+    url="https://github.com/zahash/quaeso",
     author="zahash",
     author_email="zahash.z@gmail.com",
     license="MIT",
     entry_points={
         'console_scripts': [
-            'yeet = yeet.__main__:main',
+            'quaeso = quaeso.__main__:main',
         ],
     },
     python_requires='>=3.8',
@@ -31,7 +31,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
     ],
-    packages=["yeet"],
+    packages=["quaeso"],
     include_package_data=True,
     install_requires=requirements,
 )
