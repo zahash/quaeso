@@ -12,33 +12,39 @@ pip install this repo.
 (Note: Incompatible with Python 2.x)
 
 ```sh
-pip3 install git+https://github.com/zahash/quaeso.git
+pip3 install quaeso
 ```
 
 (or)
 
 ```sh
-pip install git+https://github.com/zahash/quaeso.git
+pip install quaeso
 ```
 
 ## Usage example
 
-To get help with commandline arguments
+### To get help with commandline arguments
 
 ```sh
 quaeso --help
 ```
 
-Using Command-line Arguments
+### Using Command-line Arguments
 
 ```sh
-quaeso "some/folder/myrequest.yml"
+quaeso -f "some/folder/myrequest.yml"
 ```
 
 (or)
 
 ```sh
-quaeso "some/folder/myrequest.json"
+quaeso -f "some/folder/myrequest.json"
+```
+
+### Colorize Output
+
+```sh
+quaeso -f "some/folder/myrequest.yml" -c
 ```
 
 ### Disclaimer
@@ -66,13 +72,13 @@ and then pip install. But you will have to activate that env everytime you want 
 the response is written to stdout and headers/status are written to stderr so that users can take IO redirection to their advantage. This works on windows, linux and mac.
 
 ```sh
-quaeso "some/folder/myrequest.yml" > res.json 2> res_headers.txt
+quaeso -f "some/folder/myrequest.yml" > res.json 2> res_headers.txt
 ```
 
 both stdout and stderr can be redirected to the same file
 
 ```sh
-quaeso "some/folder/myrequest.yml" > res.json 2>&1
+quaeso -f "some/folder/myrequest.yml" > res.txt 2>&1
 ```
 
 ## Sample request file (`myrequest.yml`)
@@ -91,7 +97,7 @@ headers:
 timeout: 5000
 ```
 
-#### File Download (`quaeso "some/folder/myrequest.yml" > book.pdf`)
+#### File Download (`quaeso -f "some/folder/myrequest.yml" > book.pdf`)
 
 ```yaml
 url: http://do1.dr-chuck.com/pythonlearn/EN_us/pythonlearn.pdf

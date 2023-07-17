@@ -16,7 +16,7 @@ with (HERE / "requirements.txt").open() as f:
 
 setup(
     name="quaeso",
-    version="0.1.0",
+    version="0.1.1",
     description="python cli program to send requests",
     long_description=README,
     long_description_content_type="text/markdown",
