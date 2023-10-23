@@ -1,10 +1,21 @@
-# quaeso
-
-> python cli program to send requests
+<div align="center">
+<pre>
+ ██████╗ ██╗   ██╗ █████╗ ███████╗███████╗ ██████╗ 
+██╔═══██╗██║   ██║██╔══██╗██╔════╝██╔════╝██╔═══██╗
+██║   ██║██║   ██║███████║█████╗  ███████╗██║   ██║
+██║▄▄ ██║██║   ██║██╔══██║██╔══╝  ╚════██║██║   ██║
+╚██████╔╝╚██████╔╝██║  ██║███████╗███████║╚██████╔╝
+ ╚══▀▀═╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝ 
+---------------------------------------------------
+python cli program to send requests
+</pre>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A Python program that reads a json/yml file for request data and sends the request
+</div>
+
+Is it just me or is curl a little too complicated?
+Want something simpler in life? something made for humans? Try quaeso -- A Python program that reads a json/yml file for request data and sends the request
 
 ## Installation
 

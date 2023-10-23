@@ -1,4 +1,4 @@
-# pip3 install setuptools twine
+# pip3 install setuptools twine wheel
 # python3 setup.py sdist bdist_wheel
 # twine upload dist/*
 
@@ -16,7 +16,7 @@ with (HERE / "requirements.txt").open() as f:
 
 setup(
     name="quaeso",
-    version="0.1.1",
+    version="0.1.2",
     description="python cli program to send requests",
     long_description=README,
     long_description_content_type="text/markdown",
